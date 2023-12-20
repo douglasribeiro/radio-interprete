@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douglas.developer.core.crud.CrudController;
@@ -15,16 +14,17 @@ import com.douglas.developer.core.crud.CrudService;
 import com.douglas.developer.core.model.Interprete;
 import com.douglas.developer.radio.interprete.service.InterpreteService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/interprete")
 @Slf4j
 @CrossOrigin
+@AllArgsConstructor
 public class InterpreteController extends CrudController<Interprete, Long> {
 	
-	@Autowired
-	private InterpreteService interpreteService;
+	private final InterpreteService interpreteService;
 	
 	@Override
 	public CrudService<Interprete, Long> getService() {
@@ -40,8 +40,8 @@ public class InterpreteController extends CrudController<Interprete, Long> {
 	@GetMapping({"/nome/{nome}"})
 	public List<Interprete> findByName(@PathVariable("nome") String nome) {
 		log.info("Pesquisa interprete por nome {}", nome);
-		List<Interprete> lista = interpreteService.findByName(nome);
-		return lista;
+		return interpreteService.findByName(nome);
+		
 	}
 
 }

@@ -11,14 +11,15 @@ import com.douglas.developer.core.crud.CrudServiceImpl;
 import com.douglas.developer.core.model.Interprete;
 import com.douglas.developer.core.repository.InterpreteRepository;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class InterpreteServiceImpl extends CrudServiceImpl<Interprete, Long> implements InterpreteService {
 
-    @Autowired
-    private InterpreteRepository interpreteRepository;
+    private final InterpreteRepository interpreteRepository;
 
     @Override
     protected JpaRepository<Interprete, Long> getRepository() {
@@ -28,8 +29,7 @@ public class InterpreteServiceImpl extends CrudServiceImpl<Interprete, Long> imp
     @Transactional(readOnly = true)
 	@Override
 	public List<Interprete> findByName(String name) {
-		List<Interprete> obj = interpreteRepository.findByNome(name);
-		return obj;
+		return interpreteRepository.findByNome(name);
 	}
     
 	@Transactional(readOnly = false)
